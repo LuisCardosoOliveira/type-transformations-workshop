@@ -20,10 +20,11 @@ type A =
   | {
       type: "c";
       c: string;
-    };
+    }; // discriminated union
 
-type B = "a" | "b" | "c";
+type B = "a" | "b" | "c"; // union
 
+// enum
 enum C {
   A = "a",
   B = "b",
