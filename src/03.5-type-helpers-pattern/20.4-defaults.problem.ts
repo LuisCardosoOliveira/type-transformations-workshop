@@ -1,6 +1,8 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-type CreateDataShape<TData, TError> = {
+// Here we set a default value for the generic type `TError`
+// making it an "optional"-like type param
+type CreateDataShape<TData, TError = undefined> = {
   data: TData;
   error: TError;
 };
@@ -8,6 +10,7 @@ type CreateDataShape<TData, TError> = {
 type tests = [
   Expect<
     Equal<
+      // it can be then be omitted here
       CreateDataShape<string>,
       {
         data: string;
@@ -23,5 +26,5 @@ type tests = [
         error: SyntaxError;
       }
     >
-  >,
+  >
 ];
