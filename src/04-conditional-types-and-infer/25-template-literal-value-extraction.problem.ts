@@ -8,7 +8,8 @@ type Names = [
   "BB King",
 ];
 
-type GetSurname<T> = unknown;
+// We can use infer to pattern matching, awesome!
+type GetSurname<T> = T extends `${infer First} ${infer Last}` ? Last : never;
 
 type tests = [
   Expect<Equal<GetSurname<Names[0]>, "Pocock">>,
