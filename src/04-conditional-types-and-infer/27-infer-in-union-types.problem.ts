@@ -10,7 +10,21 @@ const parser3 = {
   extract: () => true,
 };
 
-type GetParserResult<T> = unknown;
+// First solution
+// type GetParserResult<T> = T extends () => infer R ? R : T extends {parse: () => infer P} ? P : T extends {extract: () => infer E} ? E : never;
+
+// Second solution using union types
+type GetParserResult<T> = T extends
+  | {
+      parse: () => infer TResult;
+    }
+  | {
+      extract: () => infer TResult;
+    }
+  | (() => infer TResult)
+  ? TResult
+  : never;
+
 
 type tests = [
   Expect<Equal<GetParserResult<typeof parser1>, number>>,
