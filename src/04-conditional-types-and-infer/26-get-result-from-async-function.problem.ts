@@ -10,7 +10,9 @@ const getServerSideProps = async () => {
   };
 };
 
-type InferPropsFromServerSideFunction = unknown;
+// Here we are basically saying: we want that T extends a function that 
+// returns a `Promise` that have an object with `props` inside of it
+type InferPropsFromServerSideFunction<T> = T extends () => Promise<{props: infer P}> ? P : never;
 
 type tests = [
   Expect<
